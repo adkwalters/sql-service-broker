@@ -1,0 +1,32 @@
+version: '3.7'
+services:
+
+  server_a:
+    platform: linux/arm64/v8
+    build:
+      context: server_a/.
+    networks:
+      - localnet
+    container_name: server_a
+    ports:
+      - "1433:1433"
+    volumes:
+      - certs:/tmp/certs
+
+  server_b:
+    platform: linux/arm64/v8
+    build:
+      context: server_b/.
+    networks:
+      - localnet
+    container_name: server_b
+    ports:
+      - "1434:1433"
+    volumes:
+      - certs:/tmp/certs
+
+networks:
+  localnet: null
+
+volumes:
+  certs:
